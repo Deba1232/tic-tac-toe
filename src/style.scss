@@ -1,0 +1,87 @@
+$green: #12e177;
+$orange: #ffc72a;
+$blue: #4c43d4;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $blue;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  border: none;
+  outline: none;
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.text-green {
+  color: $green;
+}
+.text-orange {
+  color: $orange;
+}
+
+.app {
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.675rem;
+  gap: 1.875rem;
+}
+
+.status-message {
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+.board {
+  .board-row {
+    display: flex;
+
+    &:last-child {
+      .square {
+        border-bottom: none;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .square {
+    font-size: 2.5rem;
+    height: 5rem;
+    width: 5rem;
+    border: 1px solid #fff;
+    border-top: none;
+
+    &:first-child {
+      border-left: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.btn-reset {
+  background-color: $blue;
+  font-size: 0.8rem;
+  color: #fff;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 0px 1px $orange;
+}
