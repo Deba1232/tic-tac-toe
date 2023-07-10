@@ -1,7 +1,16 @@
-export default function StatusMessage() {
+export default function StatusMessage({ isXNext, winner }) {
   return (
     <section className="status-message">
-      Next player is <span className="text-orange">O</span>
+      {winner ? (
+        `Winner is ${winner}`
+      ) : (
+        <>
+          Next player is{" "}
+          <span className={isXNext ? "text-green" : "text-orange"}>
+            {isXNext ? "X" : "O"}
+          </span>
+        </>
+      )}
     </section>
   );
 }
