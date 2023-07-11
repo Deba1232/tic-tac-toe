@@ -11,8 +11,11 @@ function App() {
   const [square, setSquare] = useState(new Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(false);
 
+  let winner = calculateWinner(square);
+  console.log(winner);
+
   function handleClick(squareIndex) {
-    if (square[squareIndex]) {
+    if (square[squareIndex] || winner) {
       return;
     }
 
@@ -28,17 +31,13 @@ function App() {
 
     setIsXNext((prevState) => !prevState);
   }
-  
-    let winner = calculateWinner(square);
-    console.log(winner);
-  
 
   return (
     <main className="app">
       <h1>
         TIC <span className="text-green">TAC</span> TOE
       </h1>
-      <StatusMessage isXNext={isXNext} winner={winner}/>
+      <StatusMessage isXNext={isXNext} winner={winner} />
       <Board square={square} handleClick={handleClick} />
       <button className="btn-reset">Start new game</button>
       <h2 style={{ fontWeight: "normal" }}>Current game history</h2>
