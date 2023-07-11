@@ -10,15 +10,15 @@ export default function calculateWinner(square) {
     [2, 4, 6],
   ];
   
-  let winningPLayer = null;
+  let winningPlayer = null;
 
   lines.map((line) => {
     const [a, b, c] = line;
 
     if (square[a] && (square[a] === square[b] && square[a] === square[c])) {
-      winningPLayer = square[a];
+      winningPlayer = square[a];
     }
   });
 
-  return winningPLayer;
+  return winningPlayer;
 }
