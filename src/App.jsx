@@ -8,11 +8,20 @@ import calculateWinner from "./calculateWinner";
 import "./style.scss";
 
 function App() {
-  const [square, setSquare] = useState(new Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(false);
+  const [history, setHistory] = useState([
+    {
+      square: new Array(9).fill(null),
+      isXNext: false,
+    },
+  ]);
+  const [currentMove, setCurrentMove] = useState(0);
+
+  const currentGamingBoard = history[currentMove];
+
+  let square = currentGamingBoard.square;
+  let isXNext = currentGamingBoard.isXNext;
 
   let winner = calculateWinner(square);
-
   let gameDraw = false;
   let countO = 0;
   let countX = 0;
@@ -36,18 +45,26 @@ function App() {
       return;
     }
 
-    setSquare(
-      square.map((element, idx) => {
-        if (idx === squareIndex) {
-          return isXNext ? "X" : "O";
-        } else {
-          return element;
-        }
-      })
-    );
+    setHistory((prevState) => {
+      return [
+        ...prevState,
+        {
+          square: square.map((element, idx) => {
+            if (idx === squareIndex) {
+              return isXNext ? "X" : "O";
+            } else {
+              return element;
+            }
+          }),
+          isXNext: !isXNext,
+        },
+      ];
+    });
 
-    setIsXNext((prevState) => !prevState);
+    setCurrentMove((prevState) => prevState + 1);
   }
+
+  console.log(history);
 
   return (
     <main className="app">
