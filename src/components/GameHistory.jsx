@@ -1,13 +1,19 @@
-export default function GameHistory() {
+export default function GameHistory({ history, moveTo, currentMove }) {
   return (
     <section className="history-container">
       <ul className="history">
-        <li>
-          <button>Go to game start</button>
-        </li>
-        <li>
-          <button>Go to move #1</button>
-        </li>
+        {history.map((element, idx) => {
+          return (
+            <li key={idx}>
+              <button
+                className={`move-btn ${currentMove === idx ? "active" : ""}`}
+                onClick={() => moveTo(idx)}
+              >
+                {idx === 0 ? "Go to game start" : `Go to move #${idx}`}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

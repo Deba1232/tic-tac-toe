@@ -87,6 +87,7 @@ button {
 
 .history-container{
   margin-top: -1rem;
+  margin-bottom: 1.25rem;
   .history{
     li{
       list-style: none;
@@ -102,13 +103,13 @@ button {
         border-radius: 50%;
       }
 
-      button{
+      .move-btn{
         color: #fff;
 
-        // &.active{
-        //   font-weight: bold;
-        //   color: $green;
-        // }
+        &.active{
+          font-weight: bold;
+          color: $green;
+        }
       }
     }
   }

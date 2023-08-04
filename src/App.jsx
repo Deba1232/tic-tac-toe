@@ -45,26 +45,37 @@ function App() {
       return;
     }
 
-    setHistory((prevState) => {
-      return [
-        ...prevState,
-        {
-          square: square.map((element, idx) => {
-            if (idx === squareIndex) {
-              return isXNext ? "X" : "O";
-            } else {
-              return element;
-            }
-          }),
-          isXNext: !isXNext,
-        },
-      ];
+    setHistory((prevBoardState) => {
+      const isTraversingPrevMoves = currentMove + 1 != prevBoardState.length;
+
+      const prevMoves = isTraversingPrevMoves
+        ? prevBoardState[currentMove]
+        : prevBoardState[prevBoardState.length - 1];
+
+      const nextMove = prevMoves.square.map((element, index) => {
+        if (index === squareIndex) {
+          return isXNext ? "X" : "O";
+        } else {
+          return element;
+        }
+      });
+
+      const currentBoardState = isTraversingPrevMoves
+        ? prevBoardState.slice(0, prevBoardState.indexOf(prevMoves) + 1)
+        : prevBoardState;
+
+      return currentBoardState.concat({
+        square: nextMove,
+        isXNext: !prevMoves.isXNext,
+      });
     });
 
-    setCurrentMove((prevState) => prevState + 1);
+    setCurrentMove((prevBoardState) => prevBoardState + 1);
   }
 
-  console.log(history);
+  function moveTo(move) {
+    setCurrentMove(move);
+  }
 
   return (
     <main className="app">
@@ -75,7 +86,11 @@ function App() {
       <Board square={square} handleClick={handleClick} />
       <button className="btn-reset">Start new game</button>
       <h2 style={{ fontWeight: "normal" }}>Current game history</h2>
-      <GameHistory />
+      <GameHistory
+        history={history}
+        moveTo={moveTo}
+        currentMove={currentMove}
+      />
     </main>
   );
 }
