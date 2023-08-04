@@ -84,7 +84,20 @@ function App() {
       </h1>
       <StatusMessage isXNext={isXNext} winner={winner} gameDraw={gameDraw} />
       <Board square={square} handleClick={handleClick} />
-      <button className="btn-reset">Start new game</button>
+      <button
+        className={`btn-reset ${winner || gameDraw ? "active" : ""}`}
+        onClick={() => {
+          setHistory([
+            {
+              square: new Array(9).fill(null),
+              isXNext: false,
+            },
+          ]);
+          setCurrentMove(0);
+        }}
+      >
+        Start new game
+      </button>
       <h2 style={{ fontWeight: "normal" }}>Current game history</h2>
       <GameHistory
         history={history}
