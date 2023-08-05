@@ -11,14 +11,16 @@ export default function calculateWinner(square) {
   ];
   
   let winningPlayer = null;
+  let winningIndices = [];
 
   lines.map((line) => {
     const [a, b, c] = line;
 
     if (square[a] && (square[a] === square[b] && square[a] === square[c])) {
       winningPlayer = square[a];
+      winningIndices.push(a,b,c);
     }
   });
 
-  return winningPlayer;
+  return [winningPlayer,winningIndices];
 }

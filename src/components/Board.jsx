@@ -1,10 +1,13 @@
 import Square from "./Square";
 
-export default function Board({ square, handleClick }) {
+export default function Board({ square, winnerIndices, handleClick }) {
   const squareRender = (position) => {
+    const winningSquares = winnerIndices.includes(position);
+
     return (
       <Square
         value={square[position]}
+        winningSquares={winningSquares}
         handleClick={() => handleClick(position)}
       />
     );

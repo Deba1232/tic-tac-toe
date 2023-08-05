@@ -21,7 +21,7 @@ function App() {
   let square = currentGamingBoard.square;
   let isXNext = currentGamingBoard.isXNext;
 
-  let winner = calculateWinner(square);
+  let [winner, winnerIndices] = calculateWinner(square);
   let gameDraw = false;
   let countO = 0;
   let countX = 0;
@@ -83,7 +83,11 @@ function App() {
         TIC <span className="text-green">TAC</span> TOE
       </h1>
       <StatusMessage isXNext={isXNext} winner={winner} gameDraw={gameDraw} />
-      <Board square={square} handleClick={handleClick} />
+      <Board
+        square={square}
+        winnerIndices={winnerIndices}
+        handleClick={handleClick}
+      />
       <button
         className={`btn-reset ${winner || gameDraw ? "active" : ""}`}
         onClick={() => {
